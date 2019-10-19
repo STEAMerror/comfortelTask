@@ -38,6 +38,13 @@ $(document).on('click','#change',function(){
 $(document).on('click','#changeUser',function(){
   $.post("data/php/admin-change-form.php", function(){
     changeUser();
+    
+  });
+});
+//Кнопка удалить
+$(document).on('click','#deleteUser',function(){
+  $.post("data/php/admin-change-form.php", function(){
+    deleteUser();
   });
 });
 // Кнопка добавить
@@ -55,7 +62,7 @@ function addUser() {
         url: 'data/php/add-user.php',
         data: msg,
         success: function(data) {
-          $('.user-table').html(data),
+          $('.tabl').html(data);
           alert('Успех!');
         },
         error:  function(xhr, str){
@@ -72,10 +79,35 @@ function changeUser() {
         url: 'data/php/change-user.php',
         data: msg,
         success: function(data) {
-          $('.user-table').html(data);
+          $('.user-tabl').html(data);
           alert('Успех!');
+          showTable();
         },
         error:  function(xhr, str){
+  alert('Возникла ошибка: ' + xhr.responseCode);
+        }
+  });
+}
+function showTable(){
+  $('.tabl').html('');
+  $.post("data/php/show-table.php", function(data){
+    $('.tabl').html(data);
+  });
+}
+//Функция удаления данных пользователя
+function deleteUser() {
+  var msg = $('#myform').serialize();
+  $.ajax({
+        method: 'POST',
+        cache: false,
+        url: 'data/php/delete-user.php',
+        data: msg,
+        success: function(data) {
+          $('.user-table').html(data);
+          alert('Успех!');
+          showTable();
+        },
+        error:  function(xhr){
   alert('Возникла ошибка: ' + xhr.responseCode);
         }
   });

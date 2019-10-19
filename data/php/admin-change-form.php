@@ -1,7 +1,7 @@
 <?php
 //Форма для изменения данных пользователя
 echo'<form>  
-<input id="back" type="button" value="Назад">
+<input class="btn" id="back" type="button" value="Назад">
 </form>
 <form id="myform" method="post" action="javascript:void(0);">
     <p>id изменяемого пользователя: <input type="text" name="id" /></p>
@@ -9,10 +9,12 @@ echo'<form>
     <p>Имя: <input type="text" name="name" /></p>
     <p>Отчество: <input type="text" name="otchestvo" /></p>
     <p>Статус: <input type="text" name="status" /></p>
-    <p><input type="submit" class="btn" id="changeUser" value="Изменить"/></p>
+    <p><input type="submit" class="btn" id="changeUser" value="Изменить"/>
+    <input type="submit" class="btn" id="deleteUser" value="Удалить"/></p>
 </form>';
 ?>
 <?php
+echo'<div class="tabl">';
 require_once 'connect.php';
 //Вывод таблицы пользователя		
 $result = mysqli_query ($con, "SELECT * from `user`");
@@ -25,4 +27,5 @@ while($name = mysqli_fetch_assoc($result)) {
 }
 echo '</table>';
 mysqli_close ($con);
+echo'</div>';
 ?>

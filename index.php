@@ -15,7 +15,6 @@
     ?>
   </header>
 
-<body>  
 <div class='main' id='block'>
     <?php
         require_once "data/php/main-block.php";
